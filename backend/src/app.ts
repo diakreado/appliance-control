@@ -1,15 +1,19 @@
-import express from 'express';
+import express  from 'express';
+import logger   from 'morgan';
+import path     from 'path';
+
 
 const app = express();
-const port = 3000;
+
+
+app.use(express.static(path.join(__dirname, '../public')));
+app.use(logger('dev'));
 
 app.get('/', (req, res) => {
-  res.send('The sedulous hyena ate the antelope!');
+    res.send('The sedulous hyena ate the antelope!');
 });
 
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
-//   if (err) {
-    // return console.error(err);
-//   }
-  return console.log(`server is listening on ${port}`);
+    return console.log(`server is listening on ${port}`);
 });
