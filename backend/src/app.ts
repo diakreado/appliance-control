@@ -1,19 +1,12 @@
 import express  from 'express';
-import logger   from 'morgan';
-import path     from 'path';
+import config   from './config';
+import loader   from './loaders';
 
 
 const app = express();
 
+loader(app);
 
-app.use(express.static(path.join(__dirname, '../public')));
-app.use(logger('dev'));
-
-app.get('/', (req, res) => {
-    res.send('The sedulous hyena ate the antelope!');
-});
-
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-    return console.log(`server is listening on ${port}`);
+app.listen(config.port, () => {
+    return console.log(`Server is listening on ${ config.port }`);
 });
